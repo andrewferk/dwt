@@ -1,7 +1,10 @@
 require 'helper'
 
 class TestDwt < Test::Unit::TestCase
-  should "probably rename this file and start testing for real" do
-    flunk "hey buddy, you should probably rename this file and start testing for real"
+  should "update page with template" do
+    dwt = DWT.new
+    dwt.template = File.dirname(__FILE__) + '/files/simple-02.dwt'
+    dwt.files = File.dirname(__FILE__) + '/files/simple-01.html'
+    assert_equal File.open(File.dirname(__FILE__) + '/files/simple-02.html').read, dwt.apply
   end
 end
