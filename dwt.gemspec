@@ -24,6 +24,7 @@ Gem::Specification.new do |s|
     "README.rdoc",
     "Rakefile",
     "VERSION",
+    "dwt.gemspec",
     "dwt.rb",
     "lib/dwt.rb",
     "test/files/simple-01.dwt",
