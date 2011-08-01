@@ -16,13 +16,17 @@ class DWT
       copy = (tpl_end ? tpl[0,tpl_end] : tpl)
       copy.gsub!(/<html([^>]*)>/, '<html\1><!-- InstanceBegin template="'+tpl_src+'" codeOutsideHTMLIsLocked="false" -->')
       copy.gsub!(/<\/html>/,'<!-- InstanceEnd --></html>')
-      tpl_copy << copy
+      html_index = copy.index('<html')
+      tpl_copy << (html_index ? copy[html_index, copy.length - html_index] : copy)
       tpl = tpl_start ? tpl[tpl_start,tpl.length] : ''
     end while tpl.length > 0
 
     tar_end_editable_str = "<!-- InstanceEndEditable -->"
     tar = File.open(files[0]).read
     tar_copy = []
+
+    html_index = tar.index('<html')
+    tar_copy << tar[0, html_index]
 
     begin
       tar_start = tar.index("<!-- InstanceBeginEditable")
@@ -34,8 +38,8 @@ class DWT
 
     new = ''
     (0..(tar_copy.length)).to_a.each do |i|
-      new = new += tpl_copy[i]
       new = new += tar_copy[i] if tar_copy[i]
+      new = new += tpl_copy[i] if tpl_copy[i]
     end
 
     return new
