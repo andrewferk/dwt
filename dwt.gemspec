@@ -12,6 +12,7 @@ Gem::Specification.new do |s|
   s.date = %q{2011-07-31}
   s.description = %q{Dreamweaver Template tool}
   s.email = %q{andrewferk@gmail.com}
+  s.executables = [%q{dwt}]
   s.extra_rdoc_files = [
     "LICENSE.txt",
     "README.rdoc"
@@ -24,6 +25,7 @@ Gem::Specification.new do |s|
     "README.rdoc",
     "Rakefile",
     "VERSION",
+    "bin/dwt",
     "dwt.gemspec",
     "dwt.rb",
     "lib/dwt.rb",

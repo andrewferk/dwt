@@ -1,4 +1,21 @@
 #!/usr/bin/env ruby
 $LOAD_PATH.unshift File.join(File.dirname(__FILE__), '..', 'lib')
-require 'jeweler'
-exit Jeweler::Generator::Application.run!(*ARGV)
+
+require 'trollop'
+require 'dwt'
+
+opts = Trollop::options do
+  opt :template, "DWT file", :short => 't', :type => String
+  opt :file, "Target file", :short => 'f', :type => String
+end
+Trollop::die :template, "must be present" unless opts[:template]
+Trollop::die :template, "must exist" unless File.exist?(opts[:template]) if opts[:template]
+Trollop::die :file, "must be present" unless opts[:file]
+Trollop::die :file, "must exist" unless File.exist?(opts[:template]) if opts[:template]
+
+dwt = DWT.new
+dwt.template = opts[:template]
+dwt.files = opts[:file]
+puts dwt.apply
+
+exit 0
