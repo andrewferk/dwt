@@ -57,17 +57,22 @@ class DWT
     def apply_link_update(html, tag, attribute, filename)
       html.gsub(/<#{tag}(.*)#{attribute}="([^"]*)"([^>]*)>/) do |match|
         tpl_link = $2
-        tpl_links = tpl_link.split(File::SEPARATOR)
-        tpl_links.delete_at(0)
-        filedir = Dir.new(File.dirname(filename))
-        back_separators = 0
-        begin
-          filedir_ls = filedir.each.to_a
-          break if filedir_ls.include?('Templates')
-          filedir.chdir("..")
-          back_separators += 1
-        end while filedir.pwd != "/"
-        "<#{tag}#{$1}#{attribute}=\"#{("../"*back_separators) + tpl_links.join('/')}\"#{$3}>"
+        if tpl_link.start_with?('http')
+          replace_link = tpl_link
+        else
+          tpl_links = tpl_link.split(File::SEPARATOR)
+          tpl_links.delete_at(0)
+          filedir = Dir.new(File.dirname(filename))
+          back_separators = 0
+          begin
+            filedir_ls = filedir.each.to_a
+            break if filedir_ls.include?('Templates')
+            filedir.chdir("..")
+            back_separators += 1
+          end while filedir.pwd != "/"
+          replace_link = ("../" * back_separators) + tpl_links.join('/')
+        end
+        "<#{tag}#{$1}#{attribute}=\"#{replace_link}\"#{$3}>"
       end
     end
 end
