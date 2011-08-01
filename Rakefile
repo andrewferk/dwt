@@ -18,7 +18,7 @@ Jeweler::Tasks.new do |gem|
   gem.homepage = "http://github.com/andrewferk/dwt"
   gem.license = "MIT"
   gem.summary = 'Dreamweaver Template tool'
-  gem.description = 'Dreamweaver Template tool'
+  gem.description = 'Library and command line tool to apply Dreamweaver templates to HTML files.'
   gem.email = "andrewferk@gmail.com"
   gem.authors = ["Andrew Ferk"]
   # dependencies defined in Gemfile

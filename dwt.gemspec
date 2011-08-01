@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = [%q{Andrew Ferk}]
   s.date = %q{2011-08-01}
-  s.description = %q{Dreamweaver Template tool}
+  s.description = %q{Library and command line tool to apply Dreamweaver templates to HTML files.}
   s.email = %q{andrewferk@gmail.com}
   s.executables = [%q{dwt}]
   s.extra_rdoc_files = [
@@ -28,9 +28,16 @@ Gem::Specification.new do |s|
     "bin/dwt",
     "dwt.gemspec",
     "lib/dwt.rb",
-    "test/files/simple-01.dwt",
+    "test/files/Templates/link-attribute-01.dwt",
+    "test/files/Templates/link-attribute-02.dwt",
+    "test/files/Templates/link-attribute-03.dwt",
+    "test/files/Templates/simple-01.dwt",
+    "test/files/Templates/simple-02.dwt",
+    "test/files/link-attribute-01.html",
+    "test/files/link-attribute-02.html",
+    "test/files/link-attribute-03.html",
+    "test/files/outside-html-01.html",
     "test/files/simple-01.html",
-    "test/files/simple-02.dwt",
     "test/files/simple-02.html",
     "test/helper.rb",
     "test/test_dwt.rb"

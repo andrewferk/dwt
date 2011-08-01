@@ -1,6 +1,6 @@
 = dwt
 
-Description goes here.
+Library and command line tool to apply Dreamweaver templates to HTML files.
 
 == Contributing to dwt
  
