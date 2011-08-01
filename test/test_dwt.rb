@@ -25,6 +25,12 @@ class TestDwt < Test::Unit::TestCase
                File.open(File.dirname(__FILE__) + '/files/link-attribute-02.html').read)
   end
 
+  should "modify link attributes, but ignore external not relative" do
+    assert_dwt(File.dirname(__FILE__) + '/files/Templates/link-attribute-03.dwt',
+               File.dirname(__FILE__) + '/files/simple-01.html',
+               File.open(File.dirname(__FILE__) + '/files/link-attribute-03.html').read)
+  end
+
   private
     def assert_dwt(template, file, expected)
       dwt = DWT.new

@@ -61,7 +61,7 @@ class DWT
           replace_link = tpl_link
         else
           tpl_links = tpl_link.split(File::SEPARATOR)
-          tpl_links.delete_at(0)
+          tpl_links.delete_at(0) if tpl_links[0] == '..'
           filedir = Dir.new(File.dirname(filename))
           back_separators = 0
           begin
