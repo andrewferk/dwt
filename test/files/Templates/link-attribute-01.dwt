@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>Untitled Document</title>
+<!-- TemplateEndEditable -->
+<link href="../styles/main.css" rel="stylesheet" type="text/css" media="screen" />
+<script type="text/javascript" src="../javascripts/app.js"></script>
+</head>
+<body>
+<form action="../search" method="get" name="search">
+</form>
+<a href="../home" title="Home">Home</a>
+<img src="../images/logo.png" alt="Logo" />
+</body>
+</html>

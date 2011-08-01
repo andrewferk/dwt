@@ -22,7 +22,8 @@ class DWT
     end while tpl.length > 0
 
     tar_end_editable_str = "<!-- InstanceEndEditable -->"
-    tar = File.open(files[0]).read
+    filename = files[0]
+    tar = File.open(filename).read
     tar_copy = []
 
     html_index = tar.index('<html')
@@ -38,10 +39,35 @@ class DWT
 
     new = ''
     (0..(tar_copy.length)).to_a.each do |i|
-      new = new += tar_copy[i] if tar_copy[i]
-      new = new += tpl_copy[i] if tpl_copy[i]
+      next if tar_copy[i].nil?
+      new = new += tar_copy[i]
+      copy = tpl_copy[i]
+      copy = apply_link_update(copy,'link','href',filename)
+      copy = apply_link_update(copy,'script','src',filename)
+      copy = apply_link_update(copy,'form','action',filename)
+      copy = apply_link_update(copy,'a','href',filename)
+      copy = apply_link_update(copy,'img','src',filename)
+      new = new += copy
     end
 
     return new
   end
+
+  private
+    def apply_link_update(html, tag, attribute, filename)
+      html.gsub(/<#{tag}(.*)#{attribute}="([^"]*)"([^>]*)>/) do |match|
+        tpl_link = $2
+        tpl_links = tpl_link.split(File::SEPARATOR)
+        tpl_links.delete_at(0)
+        filedir = Dir.new(File.dirname(filename))
+        back_separators = 0
+        begin
+          filedir_ls = filedir.each.to_a
+          break if filedir_ls.include?('Templates')
+          filedir.chdir("..")
+          back_separators += 1
+        end while filedir.pwd != "/"
+        "<#{tag}#{$1}#{attribute}=\"#{("../"*back_separators) + tpl_links.join('/')}\"#{$3}>"
+      end
+    end
 end
